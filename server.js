@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors'); 
 
 const app = express();
 app.use(cors()); // Enable CORS
@@ -19,18 +19,22 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', async (req, res) => {
-    const { name, phone, city, address, quantity, color, size, totalPrice } = req.body;
+    const { name, phone, city, address, quantity, color, size , totalPrice } = req.body;
 
+   
     const mailOptions = {
-        from: '715121001@smtp-brevo.com',
-        to: 'frikha.store@gmail.com',
+        from: '715121001@smtp-brevo.com', // Sender
+        to: 'frikha.store@gmail.com', // Recipient
         subject: 'Nouvelle commande',
-        text: `Nom: ${name}\nTéléphone: ${phone}\nVille: ${city}\nAdresse: ${address}\nQuantité: ${quantity}\nCouleur: ${color}\nPointure: ${size} \nPrix: ${totalPrice}`
+        text: `Nom: ${name}\nTéléphone: ${phone}\nVille: ${city}\nAdresse: ${address}\nQuantité: ${quantity}\nCouleur: ${color}\nPointure: ${size} \nprix : ${totalPrice}`
     };
 
     try {
         // Log to check if email is being sent
+        console.log('Attempting to send email...', mailOptions);
+        
         await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully');
         res.status(200).send('Email sent successfully');
     } catch (error) {
         console.error('Error sending email:', error);
@@ -38,5 +42,8 @@ app.post('/send-email', async (req, res) => {
     }
 });
 
-// Export the app (no need to call app.listen)
-module.exports = app;
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
