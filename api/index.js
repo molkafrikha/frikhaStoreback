@@ -17,6 +17,10 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+app.get('/bonjour', (req, res) => {
+    res.status(200).send('Bonjour, bienvenue sur l\'API !');
+});
+
 app.post('/send-email', async (req, res) => {
     const { name, phone, city, address, quantity, color, size, totalPrice } = req.body;
 
