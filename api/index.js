@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Configurer le transporteur SMTP
 const transporter = nodemailer.createTransport({
     host: 'smtp-relay.brevo.com',
     port: 587,
@@ -18,7 +17,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Route pour envoyer un email
 app.post('/send-email', async (req, res) => {
     const { name, phone, city, address, quantity, color, size, totalPrice } = req.body;
 
@@ -38,5 +36,10 @@ app.post('/send-email', async (req, res) => {
     }
 });
 
-// Exporter l'application Express
+// Ajouter ceci pour démarrer le serveur :
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+
 module.exports = app;

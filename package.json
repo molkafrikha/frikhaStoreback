@@ -4,7 +4,7 @@
   "description": "Backend for e-commerce platform using Express and Nodemailer for sending emails",
   "main": "api/index.js",
   "scripts": {
-    "start": "vercel dev",
+    "start": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
